@@ -12,7 +12,7 @@ export const generateUUID = () => crypto.randomUUID();
 
 const Upload = () => {
     const {auth, fs , ai, kv} = usePuterStore();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [isProcessing, setIsProcessing] = useState(false);
     const [statusText, setStatusText] = useState('');
     const [file, setFile] = useState<File | null>(null);
@@ -64,6 +64,7 @@ const handleAnalyze = async ({companyName,jobTitle,jobDescription,file} : {compa
     await kv.set(`resume:${uuid}`,JSON.stringify(data));
     setStatusText('Analysis complete , redirecting...');
     console.log(data);
+    navigate(`/resume/${uuid}`)
 }
 
 const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
